@@ -1,0 +1,17 @@
+from web3 import Web3
+
+# Подключение к ноде Ethereum (замените URL ноды на актуальный)
+web3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/your_infura_project_id'))
+
+def is_transaction_successful(tx_hash):
+    tx_receipt = web3.eth.getTransactionReceipt(tx_hash)
+    if tx_receipt is None:
+        return False
+    return tx_receipt['status'] == 1
+
+# Пример использования: указываем хеш транзакции, которую нужно проверить
+tx_hash = '0x123456789...'
+if is_transaction_successful(tx_hash):
+    print("Транзакция успешно завершена")
+else:
+    print("Транзакция не завершена или завершилась с ошибкой")
